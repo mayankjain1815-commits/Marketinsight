@@ -25,7 +25,7 @@ def get_stock_price(ticker: str):
         end_time = time.time()
 
         if stock_price is None:
-            return "No price data available for {ticker}"
+            return f"No price data available for {ticker}"
         
         logger.info(f"Retrieved Stock Price of {ticker} in {end_time - start_time:.3f} seconds")
         return stock_price
@@ -51,7 +51,7 @@ def get_historical_data(ticker: str, start_date: str, end_date: str):
         historical_data = stock.history(start=start_date, end=end_date).to_dict()
 
         if historical_data is None:
-            return "No historical data available for {ticker}"
+            return f"No historical data available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Historical Data of {ticker} in {end_time - start_time:.3f} seconds")
@@ -78,7 +78,7 @@ def get_stock_news(ticker: str):
         news = stock.news
 
         if news is None:
-            return "No news available for {ticker}"
+            return f"No news available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved News of {ticker} in {end_time - start_time:.3f} seconds")
@@ -105,7 +105,7 @@ def get_balance_sheet(ticker: str):
         balance_sheet = stock.balance_sheet.to_dict()
 
         if balance_sheet is None:
-            return "No balance sheet available for {ticker}"
+            return f"No balance sheet available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Balance Sheet of {ticker} in {end_time - start_time:.3f} seconds")
@@ -132,7 +132,7 @@ def get_income_statement(ticker: str):
         income_statement = stock.financials.to_dict()
 
         if income_statement is None:
-            return "No income statement available for {ticker}"
+            return f"No income statement available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Income Statement of {ticker} in {end_time - start_time:.3f} seconds")
@@ -159,7 +159,7 @@ def get_cash_flow(ticker: str):
         cash_flow = stock.cashflow.to_dict()
 
         if cash_flow is None:
-            return "No cash flow available for {ticker}"
+            return f"No cash flow available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Cash Flow of {ticker} in {end_time - start_time:.3f} seconds")
@@ -185,7 +185,7 @@ def get_company_info(ticker: str):
         info = stock.info
 
         if info is None:
-            return "No company info available for {ticker}"
+            return f"No company info available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Company Info of {ticker} in {end_time - start_time:.3f} seconds")
@@ -211,7 +211,7 @@ def get_dividends(ticker: str):
         dividends = stock.dividends.to_dict()
 
         if dividends is None:
-            return "No dividends available for {ticker}"
+            return f"No dividends available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Dividends of {ticker} in {end_time - start_time:.3f} seconds")
@@ -237,7 +237,7 @@ def get_splits(ticker: str):
         splits = stock.splits.to_dict()
 
         if splits is None:
-            return "No stock splits available for {ticker}"
+            return f"No stock splits available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Stock Splits of {ticker} in {end_time - start_time:.3f} seconds")
@@ -264,7 +264,7 @@ def get_institutional_holders(ticker: str):
         holders = stock.institutional_holders.to_dict()
 
         if holders is None:
-            return "No institutional holders available for {ticker}"
+            return f"No institutional holders available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Institutional Holders of {ticker} in {end_time - start_time:.3f} seconds")
@@ -290,7 +290,7 @@ def get_major_shareholders(ticker: str):
         holders = stock.major_holders.to_dict()
 
         if holders is None:
-            return "No major share holders available for {ticker}"
+            return f"No major share holders available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Major Share Holders of {ticker} in {end_time - start_time:.3f} seconds")
@@ -316,7 +316,7 @@ def get_mutual_fund_holders(ticker: str):
         holders = stock.mutualfund_holders.to_dict()
 
         if holders is None:
-            return "No mutual fund holders available for {ticker}"
+            return f"No mutual fund holders available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Mutual Fund Holders of {ticker} in {end_time - start_time:.3f} seconds")
@@ -342,7 +342,7 @@ def get_insider_transactions(ticker: str):
         insider_txn = stock.insider_transactions.to_dict()
 
         if insider_txn is None:
-            return "No insider transactions available for {ticker}"
+            return f"No insider transactions available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Insider Transactions of {ticker} in {end_time - start_time:.3f} seconds")
@@ -368,7 +368,7 @@ def get_analyst_recommendations(ticker: str):
         recommendations = stock.recommendations.to_dict()
 
         if recommendations is None:
-            return "No analyst recommendations available for {ticker}"
+            return f"No analyst recommendations available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Analyst Recommendations of {ticker} in {end_time - start_time:.3f} seconds")
@@ -394,7 +394,7 @@ def get_analyst_recommendations_summary(ticker: str):
         recommendations = stock.recommendations_summary.to_dict()
 
         if recommendations is None:
-            return "No analyst recommendations summary available for {ticker}"
+            return f"No analyst recommendations summary available for {ticker}"
 
         end_time = time.time()
         logger.info(f"Retrieved Analyst Recommendations Summary of {ticker} in {end_time - start_time:.3f} seconds")
@@ -409,7 +409,7 @@ def get_analyst_recommendations_summary(ticker: str):
 # --------------------------------------------------------------------------------
 @tool('get_ticker', description="A function that returns the ticker/symbol of a given company")
 def get_ticker(company_name: str):
-    logger.info("Retrieving Ticker of {company_name}")
+    logger.info(f"Retrieving Ticker of {company_name}")
     
     if not company_name or not isinstance(company_name, str):
         return "Error: Invalid company name provided. Please provide a valid company name."
