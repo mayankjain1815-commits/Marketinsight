@@ -416,8 +416,8 @@ def get_ticker(company_name: str):
 
     try:
         start_time = time.time()
-        url = f"https://query2.finance.yahoo.com/v1/finance/search?q={company_name}"
-        response = requests.get(url)
+        url = "https://query2.finance.yahoo.com/v1/finance/search"
+        response = requests.get(url, params={"q": company_name})
         
         if response.status_code == 200:
             data = response.json()
