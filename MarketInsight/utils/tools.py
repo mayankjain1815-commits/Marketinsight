@@ -48,11 +48,12 @@ def get_historical_data(ticker: str, start_date: str, end_date: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        historical_data = stock.history(start=start_date, end=end_date).to_dict()
+        historical_data = stock.history(start=start_date, end=end_date)
 
-        if historical_data is None:
+        if historical_data is None or historical_data.empty:
             return f"No historical data available for {ticker}"
 
+        historical_data = historical_data.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Historical Data of {ticker} in {end_time - start_time:.3f} seconds")
         return historical_data
@@ -77,7 +78,7 @@ def get_stock_news(ticker: str):
         stock = yf.Ticker(ticker)
         news = stock.news
 
-        if news is None:
+        if not news:
             return f"No news available for {ticker}"
 
         end_time = time.time()
@@ -102,11 +103,12 @@ def get_balance_sheet(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        balance_sheet = stock.balance_sheet.to_dict()
+        balance_sheet = stock.balance_sheet
 
-        if balance_sheet is None:
+        if balance_sheet is None or balance_sheet.empty:
             return f"No balance sheet available for {ticker}"
 
+        balance_sheet = balance_sheet.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Balance Sheet of {ticker} in {end_time - start_time:.3f} seconds")
         return balance_sheet
@@ -129,11 +131,12 @@ def get_income_statement(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        income_statement = stock.financials.to_dict()
+        income_statement = stock.financials
 
-        if income_statement is None:
+        if income_statement is None or income_statement.empty:
             return f"No income statement available for {ticker}"
 
+        income_statement = income_statement.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Income Statement of {ticker} in {end_time - start_time:.3f} seconds")
         return income_statement
@@ -156,11 +159,12 @@ def get_cash_flow(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        cash_flow = stock.cashflow.to_dict()
+        cash_flow = stock.cashflow
 
-        if cash_flow is None:
+        if cash_flow is None or cash_flow.empty:
             return f"No cash flow available for {ticker}"
 
+        cash_flow = cash_flow.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Cash Flow of {ticker} in {end_time - start_time:.3f} seconds")
         return cash_flow
@@ -184,7 +188,7 @@ def get_company_info(ticker: str):
         stock = yf.Ticker(ticker)
         info = stock.info
 
-        if info is None:
+        if not info:
             return f"No company info available for {ticker}"
 
         end_time = time.time()
@@ -208,11 +212,12 @@ def get_dividends(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        dividends = stock.dividends.to_dict()
+        dividends = stock.dividends
 
-        if dividends is None:
+        if dividends is None or dividends.empty:
             return f"No dividends available for {ticker}"
 
+        dividends = dividends.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Dividends of {ticker} in {end_time - start_time:.3f} seconds")
         return dividends
@@ -234,11 +239,12 @@ def get_splits(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        splits = stock.splits.to_dict()
+        splits = stock.splits
 
-        if splits is None:
+        if splits is None or splits.empty:
             return f"No stock splits available for {ticker}"
 
+        splits = splits.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Stock Splits of {ticker} in {end_time - start_time:.3f} seconds")
         return splits
@@ -261,11 +267,12 @@ def get_institutional_holders(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        holders = stock.institutional_holders.to_dict()
+        holders = stock.institutional_holders
 
-        if holders is None:
+        if holders is None or holders.empty:
             return f"No institutional holders available for {ticker}"
 
+        holders = holders.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Institutional Holders of {ticker} in {end_time - start_time:.3f} seconds")
         return holders
@@ -287,11 +294,12 @@ def get_major_shareholders(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        holders = stock.major_holders.to_dict()
+        holders = stock.major_holders
 
-        if holders is None:
+        if holders is None or holders.empty:
             return f"No major share holders available for {ticker}"
 
+        holders = holders.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Major Share Holders of {ticker} in {end_time - start_time:.3f} seconds")
         return holders
@@ -313,11 +321,12 @@ def get_mutual_fund_holders(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        holders = stock.mutualfund_holders.to_dict()
+        holders = stock.mutualfund_holders
 
-        if holders is None:
+        if holders is None or holders.empty:
             return f"No mutual fund holders available for {ticker}"
 
+        holders = holders.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Mutual Fund Holders of {ticker} in {end_time - start_time:.3f} seconds")
         return holders
@@ -339,11 +348,12 @@ def get_insider_transactions(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        insider_txn = stock.insider_transactions.to_dict()
+        insider_txn = stock.insider_transactions
 
-        if insider_txn is None:
+        if insider_txn is None or insider_txn.empty:
             return f"No insider transactions available for {ticker}"
 
+        insider_txn = insider_txn.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Insider Transactions of {ticker} in {end_time - start_time:.3f} seconds")
         return insider_txn
@@ -365,11 +375,12 @@ def get_analyst_recommendations(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        recommendations = stock.recommendations.to_dict()
+        recommendations = stock.recommendations
 
-        if recommendations is None:
+        if recommendations is None or recommendations.empty:
             return f"No analyst recommendations available for {ticker}"
 
+        recommendations = recommendations.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Analyst Recommendations of {ticker} in {end_time - start_time:.3f} seconds")
         return recommendations
@@ -391,11 +402,12 @@ def get_analyst_recommendations_summary(ticker: str):
     try:
         start_time = time.time()
         stock = yf.Ticker(ticker)
-        recommendations = stock.recommendations_summary.to_dict()
+        recommendations = stock.recommendations_summary
 
-        if recommendations is None:
+        if recommendations is None or recommendations.empty:
             return f"No analyst recommendations summary available for {ticker}"
 
+        recommendations = recommendations.to_dict()
         end_time = time.time()
         logger.info(f"Retrieved Analyst Recommendations Summary of {ticker} in {end_time - start_time:.3f} seconds")
         return recommendations
